@@ -151,7 +151,7 @@ Above implementation have Runtime complexity of O(n^2) and space complexity of O
 Runtime Complexity = O(n^2)
 Space Complexity   = O(1)
 ```
-**Note that in above implementation, we are not using `addResult()` method to handle duplicate triplets, rather we are handling duplicate scenarios, when we are adding a triplet to the final result. This optimizes the runtime of the algorithms and makes it fast.
+**Note that, in above implementation, we are not using `addResult()` method to handle duplicate triplets, rather we are handling duplicate scenarios, when we are adding a triplet to the final result. This optimizes the runtime of the algorithms and makes it fast.**
 
 ## References :
 1. https://massivealgorithms.blogspot.com/2014/06/leetcode-3sum.html
