@@ -17,7 +17,7 @@ A solution set is:
 ]
 ```
 
-## Implementation :
+## Implementation 1 : O(n^3) Time Limit Exceeded 😰
 
 ```java
 public static List<List<Integer>> threeSum(int[] nums) {
@@ -62,4 +62,56 @@ Above implementation have Runtime complexity of O(n^3) and space complexity of O
 Runtime Complexity = O(n^3)
 Space Complexity   = O(1)
 ```
+
+## Implementation 2 : O(n^2) Time Limit Exceeded 😰
+
+```java
+public static List<Integer[]> threeSum(int[] nums) {
+        List<Integer[]> result = new ArrayList<Integer[]>();
+    	if(nums == null || nums.length < 3)
+        	return result;
+    	
+    	int n = nums.length; 
+    	Arrays.sort(nums);
+    	for(int i = 0; i < n - 2; i++) {
+    		int left = i + 1;
+    		int right = n - 1;
+    		while(left < right) {
+    			if( (nums[i] + nums[left] + nums[right]) > 0) {
+    				right --;
+    			} else if( (nums[i] + nums[left] + nums[right]) < 0) {
+    				left++;
+    			} else {
+    				addResult(result, new Integer[] {nums[i], nums[left], nums[right]});
+    				left++;
+    				right--;
+    			}
+    		}
+    	}
+    	
+    	return result;
+    }
+
+	private static void addResult(List<Integer[]> result, Integer[] triplet) {
+		Set<Integer> threeSum = new HashSet<Integer>(Arrays.asList(triplet));
+		boolean alredayExists = false;
+		for(Integer[] list: result) {
+			Set<Integer> res = new HashSet<Integer>(Arrays.asList(list));
+			if(res.equals(threeSum)) {
+				alredayExists = true;
+				break;
+			}
+		}
+		if(!alredayExists) {
+			result.add(triplet);
+		}
+		
+	}
+```
+Above implementation have Runtime complexity of O(n^2) and space complexity of O(1)
+```
+Runtime Complexity = O(n^2)
+Space Complexity   = O(1)
+```
+
 
