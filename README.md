@@ -116,36 +116,43 @@ Space Complexity   = O(1)
 ## Implementation 3 : O(n^2) Optimization - Handling duplicates in beautiful way 😊
 
 ```java
-public static List<List<Integer>> threeSum(int[] nums) {
-       List<List<Integer>> result = new ArrayList<List<Integer>>();
-    	if(nums == null || nums.length < 3)
-        	return result;
-    	
-    	Arrays.sort(nums);
-    	for (int i = 0; i < nums.length - 2; i++) {
-    	    if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
-    	        int low = i+1, high = nums.length - 1;
-    	        int sum = 0 - nums[i];
-    	        while (low < high) {
-    	           if (nums[low] + nums[high] == sum) {
-    	              result.add(Arrays.asList(nums[i], nums[low], nums[high]));
-		      /**  Handling Duplicates :
-		           below 2 while loops, make sure we don't consider the same low and high numbers again
-		      **/
-    	              while (low < high && nums[low] == nums[low+1]) low++;
-    	              while (low < high && nums[high] == nums[high-1]) high--;
-    	              low++; 
-		      high--;
-    	           } else if (nums[low] + nums[high] < sum) {
-    	              low++;
-    	           } else {
-    	              high--;
-    	           }
-    	        }
-    	    }
-    	}
-    	
-       return result;
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> response = new ArrayList<>();
+        if(nums == null || nums.length < 3)
+            return response;
+        Arrays.sort(nums);
+        int n = nums.length;
+        for(int i = 0; i < n-2; i++) {
+            // Handling duplicates : we should not consider same nums[i] again
+            if(i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            int left = i+1;
+            int right = n-1;
+            while(left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if(sum == 0) {
+                    Integer[] result = {nums[i], nums[left], nums[right]};
+                    response.add(Arrays.asList(result));
+                    /**  Handling Duplicates :
+		                  below 2 while loops, make sure we don't consider the same low and high numbers again
+		            **/
+                    while(left < right && nums[left] == nums[left+1])
+                        left++;
+                    while(left < right && nums[right] == nums[right-1])
+                        right--;
+                    left++;
+                    right--;
+                } else if(sum > 0) {
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+       return response; 
+    }
 }
 ```
 Above implementation have Runtime complexity of O(n^2) and space complexity of O(1)
