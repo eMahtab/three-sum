@@ -113,7 +113,7 @@ Runtime Complexity = O(n^2)
 Space Complexity   = O(1)
 ```
 
-## Implementation 3 : O(n^2) Optimization - Making LeetCode Happy 😊
+## Implementation 3 : O(n^2) Optimization - Handling duplicates in beautiful way 😊
 
 ```java
 public static List<List<Integer>> threeSum(int[] nums) {
@@ -129,6 +129,9 @@ public static List<List<Integer>> threeSum(int[] nums) {
     	        while (low < high) {
     	           if (nums[low] + nums[high] == sum) {
     	              result.add(Arrays.asList(nums[i], nums[low], nums[high]));
+		      /**  Handling Duplicates :
+		           below 2 while loops, make sure we don't consider the same low and high numbers again
+		      **/
     	              while (low < high && nums[low] == nums[low+1]) low++;
     	              while (low < high && nums[high] == nums[high-1]) high--;
     	              low++; 
