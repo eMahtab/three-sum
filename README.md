@@ -133,8 +133,7 @@ class Solution {
             while(left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
                 if(sum == 0) {
-                    Integer[] result = {nums[i], nums[left], nums[right]};
-                    response.add(Arrays.asList(result));
+                    response.add(Arrays.asList(nums[i], nums[left], nums[right]));
                     /**  Handling Duplicates :
 		                  below 2 while loops, make sure we don't consider the same low and high numbers again
 		            **/
