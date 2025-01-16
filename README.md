@@ -121,22 +121,19 @@ class Solution {
         List<List<Integer>> response = new ArrayList<>();
         if(nums == null || nums.length < 3)
             return response;
+            
         Arrays.sort(nums);
         int n = nums.length;
         for(int i = 0; i < n-2; i++) {
-            // Handling duplicates : we should not consider same nums[i] again
-            if(i > 0 && nums[i] == nums[i-1]) {
+            if(i > 0 && nums[i] == nums[i-1])
                 continue;
-            }
+            
             int left = i+1;
             int right = n-1;
             while(left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
                 if(sum == 0) {
                     response.add(Arrays.asList(nums[i], nums[left], nums[right]));
-                    /**  Handling Duplicates :
-		                  below 2 while loops, make sure we don't consider the same low and high numbers again
-		            **/
                     while(left < right && nums[left] == nums[left+1])
                         left++;
                     while(left < right && nums[right] == nums[right-1])
